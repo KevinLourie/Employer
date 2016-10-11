@@ -72,7 +72,8 @@ public class MainFrame extends JFrame {
 		buttonPanel.add(button);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EmployeeDialog ed = new EmployeeDialog(MainFrame.this, employeeList, null);
+				boolean flag = true;
+				EmployeeDialog ed = new EmployeeDialog(MainFrame.this, employeeList, null, flag);
 				Employee f = ed.getEmployee();
 				employeeList.add(f);
 				employeeList.display(list);
@@ -106,14 +107,26 @@ public class MainFrame extends JFrame {
 				sortByEID();
 			}
 		});
+		button = new Button("Sort by Name and EID");
+		buttonPanel.add(button);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sortByNameAndEID();
+			}
+		});
 		button = new Button("Remove");
 		buttonPanel.add(button);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EmployeeDialog ed = new EmployeeDialog(MainFrame.this, employeeList, null);
-				Employee f = ed.getEmployee();
+				int selectedItem = list.getSelectedIndex();
+				if(selectedItem == -1) {
+					System.out.println("No employee selected");
+					return;
+				}
+				Employee f = employeeList.getEmployee(selectedItem);
 				employeeList.remove(f);
 				employeeList.display(list);
+				list.select(selectedItem);
 			}
 		});
 		button = new Button("Update");
@@ -125,18 +138,13 @@ public class MainFrame extends JFrame {
 					System.out.println("No employee selected");
 					return;
 				}
+				boolean flag = false; 
 				Employee f = employeeList.getEmployee(selectedItem);
-				EmployeeDialog ed = new EmployeeDialog(MainFrame.this, employeeList, f);
+				EmployeeDialog ed = new EmployeeDialog(MainFrame.this, employeeList, f, flag);
 				Employee g = ed.getEmployee();
 				f.update(g);
 				employeeList.display(list);
-			}
-		});
-		button = new Button("Sort by Name and EID");
-		buttonPanel.add(button);
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				sortByNameAndEID();
+				list.select(selectedItem);
 			}
 		});
 		button = new Button("Oldest");

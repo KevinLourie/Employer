@@ -32,7 +32,7 @@ public class EmployeeDialog extends JDialog {
 	private Employee employee;
 	private EmployeeList employeeList;
 
-	EmployeeDialog(JFrame jf, EmployeeList aEmployeeList, Employee aEmployee) {
+	EmployeeDialog(JFrame jf, EmployeeList aEmployeeList, Employee aEmployee, boolean flag) {
 		super(jf, true);
 		// Needed by updateFields to fill TextFields
 		employee = aEmployee;
@@ -72,6 +72,7 @@ public class EmployeeDialog extends JDialog {
 				retrieveFields();
 			}
 		});
+		if(flag == true) {
 		button = new Button("Search");
 		add(button);
 		button.addActionListener(new ActionListener() {
@@ -89,6 +90,7 @@ public class EmployeeDialog extends JDialog {
 				updateFields();
 			}
 		});
+		}
 		updateFields();
 		// New window has been created
 		setVisible(true);

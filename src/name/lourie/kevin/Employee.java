@@ -35,10 +35,6 @@ public class Employee {
 		this.securityClearance = securityClearance;
 	}
 
-	Employee(String[] arr) {
-
-	}
-
 	public String getEmployeeName() {
 		return employeeName;
 	}

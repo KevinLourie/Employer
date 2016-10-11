@@ -127,7 +127,7 @@ public class EmployeeList {
 	private int indexOf(Employee e) {
 		for(int i = 0; i < size; i++) {
 			// Check if employee names match
-			if(e.getEmployeeName().equals(employees[i].getEmployeeName())) {
+			if(e.getEID().equals(employees[i].getEID())) {
 				return i;
 			}
 		}
